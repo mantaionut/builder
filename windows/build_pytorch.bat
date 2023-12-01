@@ -1,4 +1,4 @@
-@echo off
+@echo on
 
 :: This script parses args, installs required libraries (miniconda, MKL,
 :: Magma), and then delegates to cpu.bat, cuda80.bat, etc.
@@ -49,7 +49,7 @@ call ..\conda\install_conda.bat
 if ERRORLEVEL 1 exit /b 1
 set "ORIG_PATH=%PATH%"
 set "PATH=%CONDA_HOME%;%CONDA_HOME%\scripts;%CONDA_HOME%\Library\bin;%PATH%"
-
+echo "ionut"
 :: create a new conda environment and install packages
 :try
 SET /A tries=3
