@@ -19,6 +19,9 @@ FOR %%v IN (%DESIRED_PYTHON%) DO (
 )
 endlocal
 
+if %BUILD_ENVIRONMENT% == windows-arm64-binary-libtorch-release (
+  set CROSS_COMPILE_ARM64=1
+}
 if "%CROSS_COMPILE_ARM64%" == "" (
     :: Install libuv
     conda install -y -q -c conda-forge libuv=1.39
