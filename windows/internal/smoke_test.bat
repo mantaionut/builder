@@ -100,6 +100,7 @@ if errorlevel 1 exit /b 1
 call conda install -yq -c "file:///%PYTORCH_FINAL_PACKAGE_DIR%" pytorch==%PYTORCH_BUILD_VERSION% -c pytorch -c numba/label/dev -c nvidia
 if ERRORLEVEL 1 exit /b 1
 call conda install -yq numpy
+
 if ERRORLEVEL 1 exit /b 1
 
 set /a CUDA_VER=%CUDA_VERSION%
