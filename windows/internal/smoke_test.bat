@@ -217,6 +217,15 @@ if "%NVIDIA_GPU_EXISTS%" == "0" (
     goto end
 )
 
+cl /c  /exportHeader /headerName:quote %install_root%\include\torch\csrc\api\include\torch\torch.h /std:c++20
+if ERRORLEVEL 1 exit /b 1
+cl /c  /headerUnit %install_root%\include\torch\csrc\api\include\torch\torch.h=torch.h.ifc %BUILDER_ROOT%\test_example_code\module.ixx /std:c++20
+if ERRORLEVEL 1 exit /b 1
+cl  /reference testModule=testModule.ifc %BUILDER_ROOT%\test_example_code\simple-torch-test-module.cpp module.obj c10.lib torch_cpu.lib /EHsc /std:c++20 
+if ERRORLEVEL 1 exit /b 1
+.\simple-torch-test-module.exe
+if ERRORLEVEL 1 exit /b 1
+
 set BUILD_SPLIT_CUDA=
 if exist "%install_root%\lib\torch_cuda_cu.lib" if exist "%install_root%\lib\torch_cuda_cpp.lib" set BUILD_SPLIT_CUDA=ON
 
